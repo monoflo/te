@@ -11,6 +11,7 @@ names on each line of the input file to the preferred format.
 """
 
 import argparse as ap
+from re import sub
 from sys import stdin, stderr
 from _io import TextIOWrapper
 
@@ -49,6 +50,7 @@ def format_names(file: TextIOWrapper):
         line = line.strip()
         line = line.lower()
         line = line.replace(' ', '_')
+        line = sub("[^A-Za-z0-9_]+", '', line)
 
         if line.isprintable() and not line.isspace():
             names.append(line)
